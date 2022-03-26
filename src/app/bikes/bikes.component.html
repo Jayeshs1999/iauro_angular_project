@@ -1,4 +1,12 @@
-<div class="bikes">
+<!-- <div class="bikes">
     <h3>My name is bikes component and i am parent of app component</h3>
     <app-bike-details></app-bike-details>
+</div> -->
+
+<div style="border: solid 1px black; padding:15px;">
+    <h3>Parent Component(Bike)</h3> 
+    <app-bike-details
+      [bike_name]="bike_name"
+      [bike_color]="bike_color"
+      [bike_price]="bike_price"></app-bike-details>
 </div>

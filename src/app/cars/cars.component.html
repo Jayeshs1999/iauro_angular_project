@@ -1,4 +1,14 @@
-<div class="cars">
+<!-- <div class="cars">
     <h3> I am child of App component and my name is cars component</h3>
     <app-car-details></app-car-details>
+</div> -->
+
+<div style="border: solid 1px gray; padding: 15px;">
+    <h1>Parent Component</h1>
+    <span><b>Value emitted from child component(cars-details components) to parent component is:</b></span>{{ data }}
+    <app-car-details (updateDataEvent)="updateData($event)"></app-car-details>
 </div>
+
+
+
+

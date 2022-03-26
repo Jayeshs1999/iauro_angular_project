@@ -1,1 +1,7 @@
-<h3>My name is cars-details and  I am child of car </h3>
+<!-- <h3>My name is cars-details and  I am child of car </h3> -->
+
+<div style="border: solid 1px gray; padding: 15px; margin-top: 15px;">
+    <h2>Child Component</h2>
+    <input type="text" #box>
+    <button (click)="updateDataEvent.emit(box.value)">Update data</button>
+</div>

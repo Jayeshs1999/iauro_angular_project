@@ -29,4 +29,5 @@ export class AppComponent {
     alert(name)
   }
 
+  city_names=["Jalgaon","Pune","Mumbai","Aurangabad","Nashik"]
 }

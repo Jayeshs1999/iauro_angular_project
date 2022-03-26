@@ -8,8 +8,16 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
 
   constructor() { }
+  data=""
 
   ngOnInit(): void {
+    
   }
+
+updateData(item){
+  this.data=item;
+
+}
+
 
 }

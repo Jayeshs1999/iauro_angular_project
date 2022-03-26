@@ -1,6 +1,36 @@
 <app-login></app-login>
 <div class="app">
     <h1>I am Parent component(App component)</h1>
+
+    <!-- *ngIf example-->
+    <h3> *ngIf example -----------------------</h3>
+    <div *ngIf="true">
+        <h1 [ngStyle]="{'color':'green'}">I am text with *ngIf</h1>
+    </div>
+
+
+    <!-- *ngIf-else example-->
+    <h3> *ngIf-else example -----------------------</h3>
+    <div *ngIf="false ; else id_selector">
+        <h1 [ngStyle]="{'color':'black'}">Angular structural directive I am in if part</h1>
+    </div>
+    <ng-template #id_selector>
+        <h1 [ngStyle]="{'color':'black'}">Angular structural directive I am in else part</h1>
+    </ng-template>
+
+    <!-- *ngFor example-->
+    <h3> *ngFor example -----------------------</h3>
+    <div *ngFor="let cities of city_names; let i=index">
+        <p>{{i+1}} {{cities}}</p>
+    </div>
+
+    <h3> *ngSwitchCase example -----------------------</h3>
+    <div [ngSwitch]="'one'">
+        <div *ngSwitchCase="'one'">One is Display</div>
+        <div *ngSwitchCase="'two'">One is Display</div>
+        <div *ngSwitchDefault>Default option is diplay</div>
+    </div>
+
     <h2>One Way data Binding :</h2>
     <h2>Event binding</h2>
     <input type="text" placeholder="property binding" [disabled]=isDisabled>
