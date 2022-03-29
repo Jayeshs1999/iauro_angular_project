@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EventService } from '../event.service';
 
 @Component({
   selector: 'app-cars',
@@ -7,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  carsEventData='';
+
+  constructor(private eventService:EventService) { }
   data=""
 
   ngOnInit(): void {
-    
+    this.eventService.on<string>().subscribe(
+      eventdata=>this.carsEventData=eventdata
+    )
   }
 
 updateData(item){

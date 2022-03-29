@@ -1,0 +1,47 @@
+<h1>reactive form </h1>
+<div  style="border: solid 1px black; padding: 30px; background-color: rgb(86, 137, 247)">
+<form [formGroup]="checkoutForm" (ngSubmit)="postData()">
+    <div class="form-group row">
+      <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+      <div class="col-sm-10">
+        <input type="email" class="form-control" id="inputEmail3" placeholder="Email" formControlName="emailAddress">
+        <span *ngIf="checkoutForm.get('emailAddress').touched && checkoutForm.get('emailAddress').hasError('required')">Enter Email Address</span>
+        <span *ngIf="checkoutForm.get('emailAddress').touched && checkoutForm.get('emailAddress').hasError('email')">Invalid Email Address</span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="inputpassword3" class="col-sm-2 col-form-label" >Quantity</label>
+      <div class="col-sm-10">
+        <input type="password" class="form-control" id="inputpassword3" placeholder="password" formControlName="password">
+        <span *ngIf="checkoutForm.get('password').touched && checkoutForm.get('password').hasError('required')">Please enter password</span>
+        <span *ngIf="checkoutForm.get('password').touched && checkoutForm.get('password').hasError('pattern')">Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character</span>
+      </div>
+    </div>
+   
+    <div class="form-group row">
+      <div class="col-sm-2">Checkbox</div>
+      <div class="col-sm-10">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="gridCheck1" formControlName="terms">
+          <label class="form-check-label" for="gridCheck1">
+            Agree to terms
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-10">
+        <button type="submit" class="btn btn-primary" (click)="buttonClick()"  [disabled]="!checkoutForm.valid" >Checkout</button>
+      </div>
+    </div>
+  </form>
+
+  <div *ngIf="isButtonClick">
+    <h1>Collected data :</h1>
+    <p>Email address is : {{checkoutForm.value.emailAddress}}</p>
+    <p>Quantity      is : {{checkoutForm.value.quantity}}</p>
+    <p>Terms accepted   : {{checkoutForm.value.terms}}</p>
+  </div>
+  
+
+</div>

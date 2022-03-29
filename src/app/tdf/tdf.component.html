@@ -1,0 +1,51 @@
+<!-- <h1>Template driven form</h1>
+<div style="border: solid 1px black; padding: 30px; background-color: gray">
+    <form #SignInForm="ngForm" (ngSubmit)="loginUser(SignInForm)">
+       
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example1">Email address :</label>
+            <input type="email" id="form2Example1" class="form-control" name="emailAddressField" ngModel required="" #emailAddressField="ngModel"  />
+           
+        </div>
+        <small class="Hello" *ngIf="emailAddressField.touched && !emailAddressField.valid">Please Enter Email</small>
+        <br>
+        
+        <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example2">Password :</label>
+            <input type="password" id="form2Example2" class="form-control" name="passwordField" ngModel required="" #passwordField="ngModel"/>
+        </div>
+        <small class="Hello" *ngIf="passwordField.touched && !passwordField.valid">Please Enter password</small>
+      
+        <div class="row mb-4">
+            <div class="col d-flex justify-content-center">
+              
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="" id="form2Example31" name="termsField" ngModel  required/>
+                    <label class="form-check-label" for="form2Example31">Agree to terms</label>
+                </div>
+            </div>
+        </div>
+
+       
+        <button type="submit" class="btn btn-primary btn-block mb-4" [disabled]="!SignInForm.valid" >Sign in</button>
+
+
+    </form>
+</div> -->
+
+<div style="border: 2px solid orange; padding: 20px; background-color: rgb(114, 168, 248);">
+<h1>Template driven form</h1>
+<form #simpleForm="ngForm" (ngSubmit)="getValues(simpleForm.value)">
+    <input type="text" ngModel name="user" placeholder="enter username" required="" #user="ngModel">
+    <small class="Hello" *ngIf="user.touched && !user.valid">Please enter username</small>
+    <br><br>
+    <input type="text" ngModel name="age" placeholder="enter your age" required="" #age="ngModel">
+    <small class="Hello" *ngIf="age.touched && !age.valid">Please enter your age</small>
+    <br><br>
+    <input type="text" ngModel name="address" placeholder="enter address" required="" #address="ngModel">
+    <small class="Hello" *ngIf="address.touched && !address.valid">Please enter your address</small>
+    <br><br>
+    <button type="submit" [disabled]="!simpleForm.valid">Get User Value</button>
+</form>
+</div>
+

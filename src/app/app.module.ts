@@ -7,8 +7,11 @@ import { LoginComponent } from './cars/cars.component';
 import { CarDetailsComponent } from './cars/car-details/car-details.component';
 import { BikesComponent } from './bikes/bikes.component';
 import { BikeDetailsComponent } from './bikes/bike-details/bike-details.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModuleModule } from './auth-module/auth-module.module';
+import { TdfComponent } from './tdf/tdf.component';
+import { ReactiveformComponent } from './reactiveform/reactiveform.component';
+
 
 @NgModule({
   declarations: [
@@ -17,12 +20,15 @@ import { AuthModuleModule } from './auth-module/auth-module.module';
     CarDetailsComponent,
     BikesComponent,
     BikeDetailsComponent,
-   
+    TdfComponent,
+    ReactiveformComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     AuthModuleModule
 
   ],
