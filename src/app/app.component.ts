@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -28,6 +29,17 @@ export class AppComponent {
   getName(name: string | number){      //(name:any)
     alert(name)
   }
-
   city_names=["Jalgaon","Pune","Mumbai","Aurangabad","Nashik"]
+
+//api service call...............................
+  data=<any>[]
+  constructor(private api:ApiService){
+    this.api.getData().subscribe(data=>{
+      console.warn(data);
+      this.data=data
+    })
+  }
+
+
+
 }

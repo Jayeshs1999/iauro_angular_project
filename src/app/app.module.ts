@@ -11,6 +11,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthModuleModule } from './auth-module/auth-module.module';
 import { TdfComponent } from './tdf/tdf.component';
 import { ReactiveformComponent } from './reactiveform/reactiveform.component';
+import { ObservableComponent } from './observable/observable.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -22,6 +24,7 @@ import { ReactiveformComponent } from './reactiveform/reactiveform.component';
     BikeDetailsComponent,
     TdfComponent,
     ReactiveformComponent,
+    ObservableComponent,
     
   ],
   imports: [
@@ -29,7 +32,8 @@ import { ReactiveformComponent } from './reactiveform/reactiveform.component';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    AuthModuleModule
+    AuthModuleModule,
+    HttpClientModule
 
   ],
   providers: [],

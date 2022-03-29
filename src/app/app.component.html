@@ -60,5 +60,22 @@
     <app-bikes></app-bikes>
     <app-tdf></app-tdf>
     <app-reactiveform></app-reactiveform>
+    <app-observable></app-observable>
+
+
+    <h1>API CALL IN ANGULAR</h1>
+    <h2>Table</h2>
+    <table border="1px" >
+        <tr>
+            <td>Id</td>
+            <td>Title</td>
+            <td>Completed</td>
+        </tr>
+        <tr *ngFor="let item of data">
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.completed}}</td>
+        </tr>
+    </table>
 
 </div>
