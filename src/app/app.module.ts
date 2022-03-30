@@ -12,7 +12,9 @@ import { AuthModuleModule } from './auth-module/auth-module.module';
 import { TdfComponent } from './tdf/tdf.component';
 import { ReactiveformComponent } from './reactiveform/reactiveform.component';
 import { ObservableComponent } from './observable/observable.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+ import { FileUploadComponent } from './file-upload/file-upload.component';
+import { MockHttpCallInterceptor } from './http.interceptor';
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     TdfComponent,
     ReactiveformComponent,
     ObservableComponent,
+    FileUploadComponent,
     
   ],
   imports: [
@@ -36,7 +39,9 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    {provide:HTTP_INTERCEPTORS, useClass:MockHttpCallInterceptor,multi:true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

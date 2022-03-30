@@ -1,5 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ApiService } from './api.service';
+
+
+const PRODUCTS_URL = "http://localhost:3000/products";
 
 @Component({
   selector: 'app-root',
@@ -8,6 +12,9 @@ import { ApiService } from './api.service';
 })
 
 export class AppComponent {
+
+  
+
   title = 'first-angular-project';
   isDisabled: boolean=false
   initial_value: String=""
@@ -33,13 +40,16 @@ export class AppComponent {
 
 //api service call...............................
   data=<any>[]
-  constructor(private api:ApiService){
+  constructor(private api:ApiService,private httpClient:HttpClient){
     this.api.getData().subscribe(data=>{
       console.warn(data);
       this.data=data
     })
   }
 
-
-
+  ngOnInit(){
+    this.httpClient.get(PRODUCTS_URL).subscribe((data)=>{
+      console.log(data);
+    })
+  }
 }
