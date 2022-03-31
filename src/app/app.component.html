@@ -1,25 +1,40 @@
-<app-login></app-login>
-<div class="app">
-    <h1>I am Parent component(App component)</h1>
+<header>
+    <div class="center">
+        <input type="button" value="Welcome Page" class="button" routerLink="" routerLinkActive="active" >
+      <input type="button" value="Reactive form" class="button" routerLink="/reactive-form" routerLinkActive="active" >
+    <input type="button" value="Template-driven form" class="button" routerLink="/td-form" routerLinkActive="active" >
+    <input type="button" value="bikes-and-cars components" class="button" routerLink="/bikes-and-cars" routerLinkActive="active" >
+    <input type="button" value="click here for display component" routerLink="/file-upload" routerLinkActive="active" class="button">
+    <input type="button" value="Welcome Page" class="button" routerLink="/observable-component" routerLinkActive="active" >
+  </div>
+  </header>
 
-    <!-- *ngIf example-->
+  <router-outlet></router-outlet>
+
+  <footer>
+    Welcome to @my side
+  </footer>
+<!-- <app-login></app-login> -->
+<!-- <div class="app">
+    <h1>I am Parent component(App component)</h1>
+   
     <h3> *ngIf example -----------------------</h3>
     <div *ngIf="true">
         <h1 [ngStyle]="{'color':'green'}">I am text with *ngIf</h1>
-    </div>
+    </div> -->
 
 
     <!-- *ngIf-else example-->
-    <h3> *ngIf-else example -----------------------</h3>
+    <!-- <h3> *ngIf-else example -----------------------</h3>
     <div *ngIf="false ; else id_selector">
         <h1 [ngStyle]="{'color':'black'}">Angular structural directive I am in if part</h1>
     </div>
     <ng-template #id_selector>
         <h1 [ngStyle]="{'color':'black'}">Angular structural directive I am in else part</h1>
-    </ng-template>
+    </ng-template> -->
 
     <!-- *ngFor example-->
-    <h3> *ngFor example -----------------------</h3>
+    <!-- <h3> *ngFor example -----------------------</h3>
     <div *ngFor="let cities of city_names; let i=index">
         <p>{{i+1}} {{cities}}</p>
     </div>
@@ -34,10 +49,10 @@
     <h2>One Way data Binding :</h2>
     <h2>Event binding</h2>
     <input type="text" placeholder="property binding" [disabled]=isDisabled>
-    <h2>Event binding</h2>
-    <button (click)="OnClick()">Click</button> <!-- event binding -->
+    <h2>Event binding</h2> -->
+    <!-- <button (click)="OnClick()">Click</button> event binding -->
 
-    <h2>Two Way data Binding :</h2>
+    <!-- <h2>Two Way data Binding :</h2>
     <div>
         <br>
         <input type="text" placeholder="two way binding" [(ngModel)]="initial_value">
@@ -48,10 +63,10 @@
     <h2 [style.color]="hasError? 'white':'blue'">Conditional case </h2>
     <h2 [style.color]="style_binding1_color">heading binding with style.color </h2>
     <h2 [ngStyle]="ng_style_binding">heading binding with ngStyle </h2>
-    <button (click)="update_color()">Click to change color orange to blue</button>
+    <button (click)="update_color()">Click to change color orange to blue</button> -->
 
 
-    <h2>Call function on button click :</h2>
+    <!-- <h2>Call function on button click :</h2>
     <button (click)="getName('This is the Jayesh as a string parameter')">Click here to see Action </button>
 
     <button (click)="getName('This is the Jayesh as a number parameter')">Click here to see action with number  </button>
@@ -62,10 +77,18 @@
     <app-reactiveform></app-reactiveform>
     <app-observable></app-observable>
 
-    <app-file-upload></app-file-upload>
+    <div class="container" style="width:600px">
+        <div class="my-3">
+          <h3>Jayesh</h3>
+          <h4>{{ title }}</h4>
+        </div>
+        <app-file-upload></app-file-upload>
+      </div> -->
+   
 
 
-    <h1>API CALL IN ANGULAR</h1>
+
+    <!-- <h1>API CALL IN ANGULAR</h1>
     <h2>Table</h2>
     <table border="1px" >
         <tr>
@@ -79,4 +102,4 @@
             <td>{{item.completed}}</td>
         </tr>
     </table>
-</div>
+</div> -->

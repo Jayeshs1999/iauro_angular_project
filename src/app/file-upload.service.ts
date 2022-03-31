@@ -6,21 +6,23 @@ import { catchError, Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileUploadService {
-   url="https://file.io";
-   constructor(private http:HttpClient) {}
-   
-  upload(file): Observable<any>{    //return an observable
-    const formData=new FormData();
-    formData.append("file",file,file.name);
-    console.log(formData)
-    return this.http.post(this.url,formData ,
-     
-    ) 
-  }
 
- 
+    private baseUrl="http://localhost:8080";
+     constructor(private http:HttpClient) {}
 
-  
+     upload(file:File):Observable<HttpEvent<any>>{
+       const formData:FormData=new FormData();
+       formData.append('file',file);
+       const req=new HttpRequest('POST',`${this.baseUrl}/upload`,formData,{
+         reportProgress:true,
+         responseType:'json'
+       });
+        console.log("request send :",req)
+       return this.http.request(req);
+     }
+     getFiles(): Observable<any>{
+       return this.http.get(`${this.baseUrl}/files`);
+     }
 }
 
 

@@ -15,7 +15,7 @@ export class AppComponent {
 
   
 
-  title = 'first-angular-project';
+  title = 'File Uploaded Part';
   isDisabled: boolean=false
   initial_value: String=""
   OnClick(){
@@ -42,7 +42,7 @@ export class AppComponent {
   data=<any>[]
   constructor(private api:ApiService,private httpClient:HttpClient){
     this.api.getData().subscribe(data=>{
-      console.warn(data);
+      // console.warn(data);
       this.data=data
     })
   }

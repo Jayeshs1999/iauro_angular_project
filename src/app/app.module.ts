@@ -15,6 +15,7 @@ import { ObservableComponent } from './observable/observable.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
  import { FileUploadComponent } from './file-upload/file-upload.component';
 import { MockHttpCallInterceptor } from './http.interceptor';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 @NgModule({
@@ -28,6 +29,7 @@ import { MockHttpCallInterceptor } from './http.interceptor';
     ReactiveformComponent,
     ObservableComponent,
     FileUploadComponent,
+    WelcomeComponent,
     
   ],
   imports: [

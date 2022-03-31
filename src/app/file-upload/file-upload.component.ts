@@ -1,5 +1,6 @@
 import { HttpEventType, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { FileUploadService } from '../file-upload.service';
 
 @Component({
@@ -9,38 +10,72 @@ import { FileUploadService } from '../file-upload.service';
 })
 export class FileUploadComponent implements OnInit {
 
-  shortLink:string=''
-  loading:boolean=false;
-  file=File;
-  progress=0;
-  msg=''
+  // shortLink:string=''
+  // loading:boolean=false;
+  // file=File;
+  // progress=0;
+  // msg=''
 
-  constructor(private fileUploadService:FileUploadService ) { }
+  selectedFiles: FileList;
+  currentFile:File;
+  progress=0;
+  message="";
+  fileInfos:Observable<any>;
+
+  constructor(private fileUploadService:FileUploadService ) {
+    console.log(this.selectedFiles)
+   }
   
-  onChange(event){
-    console.log(event)
-    console.log(event.target)
-     this.file=event.target.files[0]
-     console.log(this.file)
+  
+  
+  selectFile(event:any):void{
+    this.selectedFiles=event.target.files;
+    // console.log(this.selectedFiles)
+    console.log(this.selectedFiles.item(0))
+    
   }
 
-  onUpload(){
-    
-    this.loading=!this.loading;
-    this.fileUploadService.upload(this.file).subscribe(
-      (event:any)=>{
-         console.log("event linke",event)
-        if(typeof(event)==='object'){
-          this.shortLink=event.link;
-           console.log(event.link)
-          this.loading=false
-        }
+
+  upload():void{
+    this.progress=0;
+    if(this.selectedFiles){
+      const file:File |null=this.selectedFiles.item(0);
+      if(file){
+        this.currentFile=file;
+        this.fileUploadService.upload(this.currentFile).subscribe(
+          (event:any)=>{
+            if(event.type===HttpEventType.UploadProgress){
+              this.progress=Math.round(100*event.loaded/event.total)
+              console.log(event)
+            }
+            
+            else if(event instanceof HttpResponse){
+              console.log(event)
+              this.message=event.body.message;
+              console.log(this.message)
+              this.fileInfos=this.fileUploadService.getFiles();
+              console.log(this.fileInfos)
+            }
+          },
+          (err:any)=>{
+            console.log(err);
+            this.progress=0;
+            if(err.error && err.error.message){
+              this.message=err.error.message;
+            }else{
+              this.message="Could not upload the file"
+
+            }
+             this.currentFile=undefined;
+          }
+        );
       }
-    )
-    
+       this.selectedFiles=undefined
+    }
   }
 
   ngOnInit(): void {
+    this.fileInfos = this.fileUploadService.getFiles();
   }
 
 }
