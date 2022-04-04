@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { NavigationEnd, NavigationStart, Router } from '@angular/router';
 import { ApiService } from './api.service';
 
 
@@ -40,10 +41,30 @@ export class AppComponent {
 
 //api service call...............................
   data=<any>[]
-  constructor(private api:ApiService,private httpClient:HttpClient){
+  showLoadingIndigator=true;
+  constructor(private api:ApiService,private httpClient:HttpClient,private router:Router){
+
+    router.events.subscribe((event)=>{
+      console.log(event)
+    })
+
+    this.router.events.subscribe((routerEvent)=>{
+      if(routerEvent instanceof NavigationStart){
+        this.showLoadingIndigator=true
+        console.log("loading....")
+      }
+
+
+      if(routerEvent instanceof NavigationEnd){
+        this.showLoadingIndigator=false
+        console.log("loading stopped")
+      } 
+    })
+
     this.api.getData().subscribe(data=>{
       // console.warn(data);
       this.data=data
+
     })
   }
 
@@ -51,5 +72,9 @@ export class AppComponent {
     this.httpClient.get(PRODUCTS_URL).subscribe((data)=>{
       console.log(data);
     })
+  }
+  
+  navigate(){ 
+   
   }
 }

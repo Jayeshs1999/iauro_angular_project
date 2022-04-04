@@ -1,105 +1,29 @@
 <header>
     <div class="center">
-        <input type="button" value="Welcome Page" class="button" routerLink="" routerLinkActive="active" >
-      <input type="button" value="Reactive form" class="button" routerLink="/reactive-form" routerLinkActive="active" >
+    <input type="button" value="Send data to reactive-form" (click)="navigate()" class="button" >
+    <input type="button" value="Welcome Page" class="button" routerLink="" routerLinkActive="Inactive" >
+    <input type="button"  value="Reactive form" class="button" routerLink="/reactive-form" routerLinkActive="active" >
     <input type="button" value="Template-driven form" class="button" routerLink="/td-form" routerLinkActive="active" >
     <input type="button" value="bikes-and-cars components" class="button" routerLink="/bikes-and-cars" routerLinkActive="active" >
     <input type="button" value="click here for display component" routerLink="/file-upload" routerLinkActive="active" class="button">
-    <input type="button" value="Welcome Page" class="button" routerLink="/observable-component" routerLinkActive="active" >
+    <input type="button" value="Obsevable page" class="button" routerLink="/observable-component" routerLinkActive="active" >
+    <input type="button" value="About" class="button" routerLink="/about" routerLinkActive="active" >
   </div>
   </header>
+  <a routerLink="customer">Load customer module</a><br>
+  <a routerLink="order">Load Order module</a>
 
+  <!-- <div *ngIf="showLoadingIndigator">Loading...</div> -->
+
+  <div class="d-flex justify-content-center" *ngIf="showLoadingIndigator">
+    <div class="spinner-border" role="status" >
+      <span class="sr-only" id="loading"></span>
+    </div>
+  </div>
+ 
   <router-outlet></router-outlet>
+
 
   <footer>
     Welcome to @my side
   </footer>
-<!-- <app-login></app-login> -->
-<!-- <div class="app">
-    <h1>I am Parent component(App component)</h1>
-   
-    <h3> *ngIf example -----------------------</h3>
-    <div *ngIf="true">
-        <h1 [ngStyle]="{'color':'green'}">I am text with *ngIf</h1>
-    </div> -->
-
-
-    <!-- *ngIf-else example-->
-    <!-- <h3> *ngIf-else example -----------------------</h3>
-    <div *ngIf="false ; else id_selector">
-        <h1 [ngStyle]="{'color':'black'}">Angular structural directive I am in if part</h1>
-    </div>
-    <ng-template #id_selector>
-        <h1 [ngStyle]="{'color':'black'}">Angular structural directive I am in else part</h1>
-    </ng-template> -->
-
-    <!-- *ngFor example-->
-    <!-- <h3> *ngFor example -----------------------</h3>
-    <div *ngFor="let cities of city_names; let i=index">
-        <p>{{i+1}} {{cities}}</p>
-    </div>
-
-    <h3> *ngSwitchCase example -----------------------</h3>
-    <div [ngSwitch]="'one'">
-        <div *ngSwitchCase="'one'">One is Display</div>
-        <div *ngSwitchCase="'two'">One is Display</div>
-        <div *ngSwitchDefault>Default option is diplay</div>
-    </div>
-
-    <h2>One Way data Binding :</h2>
-    <h2>Event binding</h2>
-    <input type="text" placeholder="property binding" [disabled]=isDisabled>
-    <h2>Event binding</h2> -->
-    <!-- <button (click)="OnClick()">Click</button> event binding -->
-
-    <!-- <h2>Two Way data Binding :</h2>
-    <div>
-        <br>
-        <input type="text" placeholder="two way binding" [(ngModel)]="initial_value">
-        <h1>{{initial_value}}</h1>
-    </div>
-
-    <h1>Style binding</h1>
-    <h2 [style.color]="hasError? 'white':'blue'">Conditional case </h2>
-    <h2 [style.color]="style_binding1_color">heading binding with style.color </h2>
-    <h2 [ngStyle]="ng_style_binding">heading binding with ngStyle </h2>
-    <button (click)="update_color()">Click to change color orange to blue</button> -->
-
-
-    <!-- <h2>Call function on button click :</h2>
-    <button (click)="getName('This is the Jayesh as a string parameter')">Click here to see Action </button>
-
-    <button (click)="getName('This is the Jayesh as a number parameter')">Click here to see action with number  </button>
-    
-    <app-cars></app-cars>
-    <app-bikes></app-bikes>
-    <app-tdf></app-tdf>
-    <app-reactiveform></app-reactiveform>
-    <app-observable></app-observable>
-
-    <div class="container" style="width:600px">
-        <div class="my-3">
-          <h3>Jayesh</h3>
-          <h4>{{ title }}</h4>
-        </div>
-        <app-file-upload></app-file-upload>
-      </div> -->
-   
-
-
-
-    <!-- <h1>API CALL IN ANGULAR</h1>
-    <h2>Table</h2>
-    <table border="1px" >
-        <tr>
-            <td>Id</td>
-            <td>Title</td>
-            <td>Completed</td>
-        </tr>
-        <tr *ngFor="let item of data">
-            <td>{{item.id}}</td>
-            <td>{{item.title}}</td>
-            <td>{{item.completed}}</td>
-        </tr>
-    </table>
-</div> -->

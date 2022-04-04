@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { checkLowerCaseLetterInPassword, checkMinLengthForPassword, checkNumericInPassword, checkSpecialCharacterInPassword, checkUpperCaseLetterInPassword, EventService } from '../event.service';
 
 @Component({
@@ -8,20 +9,14 @@ import { checkLowerCaseLetterInPassword, checkMinLengthForPassword, checkNumeric
   styleUrls: ['./reactiveform.component.css']
 })
 export class ReactiveformComponent implements OnInit {
+  teams= true
 
   isButtonClick = false
   emailAddress: FormControl
 
-  // checkoutForm:FormGroup;
-  // constructor(private formBuilder:FormBuilder) {
-  //   this.checkoutForm=formBuilder.group({
-  //   emailAddress: new FormControl(),
-  //   quantity:new FormControl(),
-  //   terms:new FormControl(),
-  //  })}
 
   checkoutForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private customValidator: EventService) {
+  constructor(private formBuilder: FormBuilder, private customValidator: EventService,private route:ActivatedRoute,private router:Router) {
     this.checkoutForm = formBuilder.group({
       emailAddress: ['', [Validators.required, Validators.email]],
       password: ['',
@@ -38,15 +33,12 @@ export class ReactiveformComponent implements OnInit {
       terms: ['', Validators.required],
 
     })
-    //  this.checkoutForm.get("password").valueChanges.subscribe(x => {
-    //   console.log('password value changed')
-    //   console.log(x)
-    //  })
-
+   
     this.checkoutForm.get("emailAddress").valueChanges.subscribe(x => {
       console.log('email value changed')
       console.log(x)
     })
+
 
   }
   get password() {
@@ -59,9 +51,17 @@ export class ReactiveformComponent implements OnInit {
   }
   buttonClick() {
     this.isButtonClick = true
+    let data=this.checkoutForm.value;
+    console.log(data)
+    
+      this.router.navigate(['/about'],{
+        queryParams:{data:btoa(JSON.stringify(data))}
+      })
   }
 
   ngOnInit(): void {
+    this.teams = this.route.snapshot.data['reactive-form'];
   }
+
 
 }

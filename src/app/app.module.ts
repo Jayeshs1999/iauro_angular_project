@@ -16,7 +16,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
  import { FileUploadComponent } from './file-upload/file-upload.component';
 import { MockHttpCallInterceptor } from './http.interceptor';
 import { WelcomeComponent } from './welcome/welcome.component';
-
+import { AboutComponent } from './about/about.component';
+console.log("App module loaded")
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
     ObservableComponent,
     FileUploadComponent,
     WelcomeComponent,
+    AboutComponent,
     
   ],
   imports: [
@@ -38,7 +40,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
     FormsModule,
     ReactiveFormsModule,
     AuthModuleModule,
-    HttpClientModule
+    HttpClientModule,
+   
 
   ],
   providers: [

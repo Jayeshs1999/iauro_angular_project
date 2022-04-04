@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tdf',
@@ -8,7 +9,10 @@ import { NgForm } from '@angular/forms';
 })
 export class TdfComponent implements OnInit {
 
-  constructor() { }
+  name=''
+  constructor(private router:Router) {
+   
+   }
 
   ngOnInit(): void {
   }
