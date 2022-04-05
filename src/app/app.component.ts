@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { NavigationEnd, NavigationStart, Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { ApiService } from './api.service';
 
 
@@ -55,7 +55,7 @@ export class AppComponent {
       }
 
 
-      if(routerEvent instanceof NavigationEnd){
+      if(routerEvent instanceof NavigationEnd|| routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationError){
         this.showLoadingIndigator=false
         console.log("loading stopped")
       } 

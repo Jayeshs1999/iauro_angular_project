@@ -17,14 +17,25 @@ export class TdfComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginUser(signInFrom:NgForm){
-    console.log(signInFrom)
-    console.log(signInFrom.value.emailAddressField)
-  }
-
-  getValues(val){
-    console.log(val)
+  value;
+  getValues(simpleForm:NgForm){
+    console.log(simpleForm)
+    this.value=simpleForm
+    console.log(this.value)
 
   }
+
+  // getValues(val){
+  //   console.log(val)
+
+  // }
+  
+  // buttonClick(simpleForm:NgForm) {
+  //   let data=simpleForm;
+  //   console.log(data)
+  //     this.router.navigate(['/about'],{
+  //       queryParams:{data:btoa(JSON.stringify(data))}
+  //     })
+  // }
 
 }

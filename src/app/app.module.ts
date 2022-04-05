@@ -17,6 +17,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MockHttpCallInterceptor } from './http.interceptor';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AboutComponent } from './about/about.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 console.log("App module loaded")
 
 @NgModule({
@@ -32,6 +33,7 @@ console.log("App module loaded")
     FileUploadComponent,
     WelcomeComponent,
     AboutComponent,
+    PageNotFoundComponent,
     
   ],
   imports: [

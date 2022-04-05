@@ -18,7 +18,7 @@ export class AboutComponent implements OnInit {
     this.activeRoute.queryParams.subscribe(params=>{
       console.log(params)
       this.data=JSON.parse(atob(params['data']))
-      console.log(this.data.emailAddress)
+      console.log(this.data.user)
       this.email=this.data.emailAddress
       this.password=this.data.password
     });

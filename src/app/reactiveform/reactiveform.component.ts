@@ -8,8 +8,9 @@ import { checkLowerCaseLetterInPassword, checkMinLengthForPassword, checkNumeric
   templateUrl: './reactiveform.component.html',
   styleUrls: ['./reactiveform.component.css']
 })
+
 export class ReactiveformComponent implements OnInit {
-  teams= true
+ teams= true
 
   isButtonClick = false
   emailAddress: FormControl
@@ -51,9 +52,9 @@ export class ReactiveformComponent implements OnInit {
   }
   buttonClick() {
     this.isButtonClick = true
+    let s=this.isButtonClick;
     let data=this.checkoutForm.value;
     console.log(data)
-    
       this.router.navigate(['/about'],{
         queryParams:{data:btoa(JSON.stringify(data))}
       })

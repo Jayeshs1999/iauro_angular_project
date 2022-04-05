@@ -45,7 +45,7 @@
     <input type="text" ngModel name="address" placeholder="enter address" required="" #address="ngModel">
     <small class="Hello" *ngIf="address.touched && !address.valid">Please enter your address</small>
     <br><br>
-    <button type="submit" [disabled]="!simpleForm.valid">Get User Value</button>
+    <button type="submit" [disabled]="!simpleForm.valid" >Get User Value</button>
 </form>
 </div>
 
