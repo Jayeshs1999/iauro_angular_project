@@ -1,0 +1,93 @@
+<h1 style="text-align: center;">Student information</h1>
+
+<mat-grid-list cols="2" rowHeight="500px" gutterSize="5px">
+  <mat-grid-tile>
+    <mat-grid-tile-header>Student information From</mat-grid-tile-header>
+    <form [formGroup]="submitForm" class="form">
+      <mat-form-field floatLabel="auto" hideRequiredMarker="false" appearance="outline" color="primary" >
+        <mat-label>First Name</mat-label>
+        <input matInput required placeholder="Enter your firstname" formControlName="firstname">
+        <mat-error *ngIf="submitForm.get('firstname').invalid">{{getErrorMessageForFirstName()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="auto" hideRequiredMarker="false" appearance="outline" color="primary" >
+        <mat-label>Last Name</mat-label>
+        <input matInput required placeholder="Enter your lastname" formControlName="lastname">
+        <mat-error *ngIf="submitForm.get('lastname').invalid">{{getErrorMessageForLastname()}}</mat-error>
+      </mat-form-field>
+      <br>
+
+      <mat-form-field floatLabel="auto" hideRequiredMarker="false" appearance="outline" color="primary" >
+        <mat-label>Mobile Number</mat-label>
+        <input matInput  oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+        type = "number"
+        required placeholder="Enter your Mobile number" maxlength="10"  formControlName="mobile" >
+        <mat-error *ngIf="submitForm.get('mobile').invalid">{{getErrorMessageForMobileNo()}}</mat-error>
+      </mat-form-field>
+
+      <mat-form-field floatLabel="auto" hideRequiredMarker="false" appearance="outline" color="primary" >
+        <mat-label>Email Address</mat-label>
+        <input matInput required placeholder="Enter your email" formControlName="email" email>
+        <mat-error *ngIf="submitForm.get('email').invalid">{{getErrorMessageForEmail()}}</mat-error>
+      </mat-form-field>
+  
+      <div class="gender">
+        <label style="font-weight: bold;">Gender :</label><br>
+        <mat-radio-group aria-label="Select an option" formControlName="gender" >&nbsp;
+          <mat-radio-button value="male"> Male</mat-radio-button>&nbsp;
+          <mat-radio-button value="female">Female</mat-radio-button>
+          <mat-error *ngIf="submitForm.get('gender').invalid">{{getErrorMessageForGender()}}</mat-error>
+        </mat-radio-group>
+      </div>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Select State</mat-label>
+        <mat-select formControlName="state" required>
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let state of states" [value]="state.name">
+            {{state.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="submitForm.get('state').hasError('required')"> {{getErrorMessageForState()}}</mat-error>
+      </mat-form-field>
+      <br>
+<div *ngIf="buttonDecision; else elseBlock">
+  <button type="submit" mat-raised-button #elseBlock class="submit"  color="accent" (click)="updateInfo(submitForm)" [disabled]="!submitForm.valid">Update</button>
+  <br><button mat-button color="primary" class="elsesumbit" (click)="backToSubmit()">Else Submit new student information</button>
+      </div>  
+      <ng-template #elseBlock> <button type="submit" mat-raised-button  #elseBlock class="submit"  color="accent" (click)="submitButton(submitForm)" [disabled]="!submitForm.valid" >Submit</button>
+      </ng-template>
+    </form>
+
+
+  </mat-grid-tile>
+  <mat-grid-tile  >
+    <!-- <div >{{value['firstname']}}</div> -->
+
+    <table border="1px solid black">
+      <tr *ngIf="tableHeading">
+        <th>FirstName</th>
+        <th>LastName</th>
+        <th>Mobile</th>
+        <th>Gender</th>
+        <!-- <th>Email</th> -->
+        <th>State</th>
+        <th>Update</th>
+        <th>Delete</th>
+     </tr>
+     <tr  *ngFor="let value of localStorageData ; let indexOfelement=index;">
+       <td>{{value["firstname"]}}</td>
+       <td>{{value["lastname"]}}</td>
+       <td>{{value["mobile"]}}</td>
+       <td>{{value["gender"]}}</td>
+       <!-- <td>{{value["email"]}}</td> -->
+       <td>{{value["state"]}}</td>
+     <td > <button type="submit" mat-raised-button   color="accent" (click)="editInfo(indexOfelement)"  >Update</button></td> 
+      <td><button type="submit" mat-raised-button   color="accent" (click)="deleteValue(indexOfelement)">Delete</button></td> 
+   
+     </tr>
+    </table>
+    
+
+  </mat-grid-tile>
+</mat-grid-list>

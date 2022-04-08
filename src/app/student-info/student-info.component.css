@@ -1,0 +1,43 @@
+/* .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+  td {
+    padding-right: 8px;
+  }
+   */
+ .form  .mat-form-field {
+   margin-left: 20px;
+ }
+ .parent-div{
+   background-color: aquamarine;
+   padding: 50px;
+ }
+ .gender {
+  margin-left: 20px;
+ }
+ .submit{
+   padding: 5px 90px 5px 90px;
+   margin-left: 25%;
+   margin-right: 25%;
+ 
+  
+ }
+ .mat-grid-tile{
+   background-color:white;
+  border: 1px solid green;
+  
+ }
+ .elsesumbit{
+  margin-left: 22%;
+  margin-right: 25%;
+  padding-top: 15px;
+  
+
+ }

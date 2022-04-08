@@ -18,6 +18,10 @@ import { MockHttpCallInterceptor } from './http.interceptor';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AboutComponent } from './about/about.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StudentInfoComponent } from './student-info/student-info.component';
+import { MaterialModule } from './material/material.module';
+
 console.log("App module loaded")
 
 @NgModule({
@@ -34,6 +38,8 @@ console.log("App module loaded")
     WelcomeComponent,
     AboutComponent,
     PageNotFoundComponent,
+    StudentInfoComponent,
+    
     
   ],
   imports: [
@@ -43,8 +49,10 @@ console.log("App module loaded")
     ReactiveFormsModule,
     AuthModuleModule,
     HttpClientModule,
-   
-
+    BrowserAnimationsModule,
+ 
+    MaterialModule,
+    MaterialModule
   ],
   providers: [
     {provide:HTTP_INTERCEPTORS, useClass:MockHttpCallInterceptor,multi:true}
