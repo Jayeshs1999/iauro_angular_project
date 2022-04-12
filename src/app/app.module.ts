@@ -21,6 +21,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentInfoComponent } from './student-info/student-info.component';
 import { MaterialModule } from './material/material.module';
+import { PopupComponent } from './popup/popup.component';
 
 console.log("App module loaded")
 
@@ -39,6 +40,7 @@ console.log("App module loaded")
     AboutComponent,
     PageNotFoundComponent,
     StudentInfoComponent,
+    PopupComponent,
     
     
   ],

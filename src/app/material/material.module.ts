@@ -8,7 +8,8 @@ import{ MatCheckboxModule} from '@angular/material/checkbox';
 import{MatButtonModule} from '@angular/material/button'
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatTableModule} from '@angular/material/table';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const MaterialComponent=[
   MatInputModule,
@@ -19,7 +20,9 @@ const MaterialComponent=[
   MatCheckboxModule,
   MatButtonModule,
   MatGridListModule,
-  MatTableModule
+  MatTableModule,
+  MatPaginatorModule,
+  MatDialogModule
   
 ];
 

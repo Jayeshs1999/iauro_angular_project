@@ -1,28 +1,31 @@
 import { variable } from '@angular/compiler/src/output/output_ast';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs';
+import {MatDialog} from '@angular/material/dialog';
+import { PopupComponent } from '../popup/popup.component';
 
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+  lastname: string;
+  firstname: number;
+  mobile: number;
+  state: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+  {firstname: 1, lastname: 'Hydrogen', mobile: 10079, state: 'H'},
+  {firstname: 2, lastname: 'Hydrogen', mobile: 10079, state: 'H'},
+  {firstname: 3, lastname: 'Hydrogen', mobile: 10079, state: 'H'},
+  {firstname: 4, lastname: 'Hydrogen', mobile: 10079, state: 'H'},
+  {firstname: 5, lastname: 'Hydrogen', mobile: 10079, state: 'H'},
+  {firstname: 6, lastname: 'Hydrogen', mobile: 10079, state: 'H'},
+  {firstname: 7, lastname: 'Hydrogen', mobile: 10079, state: 'H'},
+  {firstname: 8, lastname: 'Hydrogen', mobile: 10079, state: 'H'},
+ 
+  
 ];
 
 
@@ -32,10 +35,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./student-info.component.css']
 })
 
-export class StudentInfoComponent implements OnInit {
+export class StudentInfoComponent implements AfterViewInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol','states','update','delete'];
   
-
   states = [
     {name: 'Maharashtra'},
     {name: 'Panjab'},
@@ -48,7 +50,15 @@ export class StudentInfoComponent implements OnInit {
 
    array=[];
    getValue:Array<Object>=[]
-   localStorageData:Array<Object>=[]
+   localStorageData:Array<Object>=[{firstname:"Jayesh",lastname:"Sevat",mobile:8888585093,state:"Maharashtra"},
+   {firstname:"Jayesh",lastname:"Sevat",mobile:8888585093,gender:"male",state:"Maharashtra"},
+   {firstname:"Jash",lastname:"Sevatkar",mobile:8888586793,gender:"female",state:"Maharashtra"},
+   {firstname:"shubham",lastname:"Sevat",mobile:9888585093,gender:"male",state:"Mahacashtra"},
+   {firstname:"Jayesh",lastname:"Sevat",mobile:8888585093,gender:"male",state:"Maharashtra"},
+   {firstname:"Jash",lastname:"Sevakar",mobile:8888586793,gender:"female",state:"Maharashtra"},
+   {firstname:"shubham",lastname:"Sevat",mobile:9888585093,gender:"male",state:"Mahacashtra"},]
+  
+   
    buttonDecision=false
    indexValue;
    tableHeading=true
@@ -58,8 +68,8 @@ export class StudentInfoComponent implements OnInit {
   submitForm: FormGroup;
   // colorControl = new FormControl('primary');
   // fontSizeControl = new FormControl(16, Validators.min(10));
-  
-  constructor(fb: FormBuilder) {
+  @ViewChild(MatTable,{static:true}) table: MatTable<any>;
+  constructor(fb: FormBuilder,public  dialog:MatDialog) {
     
     this.submitForm = fb.group({
       firstname:['', Validators.required],
@@ -71,6 +81,23 @@ export class StudentInfoComponent implements OnInit {
       state:['',Validators.required]
     });
   }
+
+  dataSource=new MatTableDataSource(this.localStorageData);//fgfgfbbfbf
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    console.log("paginator : ",this.dataSource.paginator)
+    console.log("Data source :",this.dataSource)
+  }
+
+  ngOnInit(): void {
+    this.localStorageData= JSON.parse(localStorage.getItem(('stud_info')))
+    this.dataSource=new MatTableDataSource(this.localStorageData);
+    
+      // this.getValue
+  }
+
   getErrorMessageForEmail(){
     if(this.submitForm.get('email').hasError('email')){
       return "Not a valid email ";
@@ -130,38 +157,59 @@ export class StudentInfoComponent implements OnInit {
     console.log("local Storage data :",this.localStorageData)
     console.log(this.getValue)
     console.log(this.localStorageData[0])
-    // submitForm.reset()
+    this.dataSource=new MatTableDataSource(this.localStorageData);
+    this.dataSource._updateChangeSubscription()
+    this.dataSource._renderChangesSubscription
+    this.dataSource.paginator = this.paginator;
+    submitForm.reset()
   }
-  ngOnInit(): void {
-    this.localStorageData= JSON.parse(localStorage.getItem(('stud_info')))
-    
-      // this.getValue
+  
+
+  openDialog(action,obj,indexOfElement){
+     obj.action = action;
+     console.log("action:",obj.action)
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px',
+      data:obj
+    });
+    console.log("dialogRef :",dialogRef)
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("result.event :",result.event)
+      console.log("result.event :",result)
+     if(result.event == 'Delete'){
+     
+        this.deleteRowData(result.data,indexOfElement);  
+      }
+    });
+  }
+
+  deleteRowData(row_obj,indexOfElement){
+    this.localStorageData= this.localStorageData.filter((value)=> value[indexOfElement]!==this.localStorageData[indexOfElement])
+         console.log(this.localStorageData)
+       this.localStorageData.splice(indexOfElement,1)
+      console.log(this.localStorageData)
+      this.dataSource=new MatTableDataSource(this.localStorageData);
+      this.dataSource._updateChangeSubscription()
+     
+   
   }
 
   // deleteValue(indexOfElement){
    
-  //   console.log(indexOfElement)
-  //   this.localStorageData.splice(indexOfElement,1)
-  //   // this.getValue.splice(indexOfElement,1)
-  //   // console.log(this.getValue)
-  //   if(this.localStorageData.length==0){
-  //       this.tableHeading=false
-  //   } 
-  // }
 
-  deleteValue(indexOfElement){
-   
-      console.log(indexOfElement)
-      // this.getValue.splice(indexOfElement,1)
-      // console.log(this.getValue)
-      // if(this.localStorageData.length==0){
-      //     this.tableHeading=false
-      // } 
-       this.localStorageData= this.localStorageData.filter((value)=> value[indexOfElement]!==this.localStorageData[indexOfElement])
-       console.log(this.localStorageData)
-     this.localStorageData.splice(indexOfElement,1)
-    console.log(this.localStorageData)
-    }
+  //     console.log(indexOfElement)
+  //     // this.getValue.splice(indexOfElement,1)
+  //     // console.log(this.getValue)
+  //     // if(this.localStorageData.length==0){
+  //     //     this.tableHeading=false
+  //     // } 
+  //      this.localStorageData= this.localStorageData.filter((value)=> value[indexOfElement]!==this.localStorageData[indexOfElement])
+  //      console.log(this.localStorageData)
+  //    this.localStorageData.splice(indexOfElement,1)
+  //   console.log(this.localStorageData)
+  //   this.dataSource=new MatTableDataSource(this.localStorageData);
+  //   this.dataSource._updateChangeSubscription()
+  //   }
 
   editInfo(indexOfElement){
     this.indexValue=indexOfElement
@@ -181,6 +229,10 @@ export class StudentInfoComponent implements OnInit {
     this.localStorageData= this.localStorageData.filter((value)=>{
       return value
     })
+
+    this.dataSource=new MatTableDataSource(this.localStorageData);
+    this.dataSource._updateChangeSubscription()
+    
     // this.localStorageData[this.indexValue]= value
     
 
@@ -197,15 +249,19 @@ console.log("local storage value :",this.localStorageData)
   //  console.log("Value :", value)
   //  this.localStorageData.splice(this.indexValue,1,value)
   //   console.log("Hiiiiii :",this.localStorageData)
-    
-   
-   
-   
-    // submitForm.reset()
+     submitForm.reset()
   }
 
   backToSubmit(){
     this.tableHeading=true
     this.buttonDecision=false
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    console.log("Filter value :",filterValue)
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    console.log(this.dataSource.filter)
+
   }
 }
