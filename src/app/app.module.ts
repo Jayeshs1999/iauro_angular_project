@@ -22,6 +22,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StudentInfoComponent } from './student-info/student-info.component';
 import { MaterialModule } from './material/material.module';
 import { PopupComponent } from './popup/popup.component';
+import { SubmitPopupComponent } from './submit-popup/submit-popup.component';
+import { ChildComponent } from './child/child.component';
+import { Child1Component } from './welcome/child1/child1.component';
 
 console.log("App module loaded")
 
@@ -41,6 +44,9 @@ console.log("App module loaded")
     PageNotFoundComponent,
     StudentInfoComponent,
     PopupComponent,
+    SubmitPopupComponent,
+    ChildComponent,
+    Child1Component,
     
     
   ],

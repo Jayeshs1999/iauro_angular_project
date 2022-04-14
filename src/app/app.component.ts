@@ -13,8 +13,7 @@ const PRODUCTS_URL = "http://localhost:3000/products";
 })
 
 export class AppComponent {
-
-  
+  arbitaryData="initial value"
 
   title = 'File Uploaded Part';
   isDisabled: boolean=false
@@ -44,6 +43,10 @@ export class AppComponent {
   showLoadingIndigator=true;
   constructor(private api:ApiService,private httpClient:HttpClient,private router:Router){
 
+    setTimeout(() => {
+      this.arbitaryData='final'
+    }, 5000);
+
     router.events.subscribe((event)=>{
       console.log(event)
     })
@@ -72,6 +75,8 @@ export class AppComponent {
     this.httpClient.get(PRODUCTS_URL).subscribe((data)=>{
       console.log(data);
     })
+
+   
   }
   
   navigate(){ 

@@ -6,6 +6,7 @@ import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { first } from 'rxjs';
 import {MatDialog} from '@angular/material/dialog';
 import { PopupComponent } from '../popup/popup.component';
+import { SubmitPopupComponent } from '../submit-popup/submit-popup.component';
 
 
 export interface PeriodicElement {
@@ -161,37 +162,46 @@ export class StudentInfoComponent implements AfterViewInit {
     this.dataSource._updateChangeSubscription()
     this.dataSource._renderChangesSubscription
     this.dataSource.paginator = this.paginator;
-    submitForm.reset()
+   
   }
-  
 
-  openDialog(action,obj,indexOfElement){
-     obj.action = action;
-     console.log("action:",obj.action)
-    const dialogRef = this.dialog.open(PopupComponent, {
-      width: '250px',
-      data:obj
-    });
-    console.log("dialogRef :",dialogRef)
-    dialogRef.afterClosed().subscribe(result => {
-      console.log("result.event :",result.event)
-      console.log("result.event :",result)
-     if(result.event == 'Delete'){
-     
-        this.deleteRowData(result.data,indexOfElement);  
+ 
+
+  // openDialog(action,obj,indexOfElement){
+  //    obj.action = action;
+  //    console.log("action:",obj.action)
+  //   const dialogRef = this.dialog.open(PopupComponent, {
+  //     width: '250px',
+  //     data:obj
+  //   });
+  //   console.log("dialogRef :",dialogRef)
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log("result.event :",result.event)
+  //     console.log("result.event :",result)
+  //    if(result.event == 'Delete'){
+  //       this.deleteRowData(result.data,indexOfElement);  
+  //     }
+  //   });
+  // }
+
+  openDialog(indexOfElement){
+    this.dialog.open(PopupComponent,{width:'250px'}).afterClosed().subscribe((value)=>{
+      console.log("value :",value)
+      if(value=='delete'){
+        this.deleteRowData(indexOfElement)
       }
-    });
+      
+    })
   }
 
-  deleteRowData(row_obj,indexOfElement){
+  deleteRowData(indexOfElement){
     this.localStorageData= this.localStorageData.filter((value)=> value[indexOfElement]!==this.localStorageData[indexOfElement])
          console.log(this.localStorageData)
        this.localStorageData.splice(indexOfElement,1)
       console.log(this.localStorageData)
       this.dataSource=new MatTableDataSource(this.localStorageData);
       this.dataSource._updateChangeSubscription()
-     
-   
+      this.dataSource.paginator = this.paginator;
   }
 
   // deleteValue(indexOfElement){
@@ -249,7 +259,7 @@ console.log("local storage value :",this.localStorageData)
   //  console.log("Value :", value)
   //  this.localStorageData.splice(this.indexValue,1,value)
   //   console.log("Hiiiiii :",this.localStorageData)
-     submitForm.reset()
+    
   }
 
   backToSubmit(){
